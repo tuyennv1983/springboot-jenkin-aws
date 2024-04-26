@@ -21,7 +21,7 @@ pipeline {
         stage('Packaging/Pushing imagae') {
 
             steps {
-                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
+                withDockerRegistry(credentialsId: 'docker-hub-cred', url: 'https://index.docker.io/v1/') {
                     sh 'docker build -t honguyen982020614/devopsexample .'
                     sh 'docker push honguyen982020614/devopsexample'
                 }
@@ -46,12 +46,12 @@ pipeline {
         stage('Deploy Spring Boot to DEV') {
             steps {
                 echo 'Deploying and cleaning'
-                sh 'docker image pull khaliddinh/springboot'
-                sh 'docker container stop khalid-springboot || echo "this container does not exist" '
+                sh 'docker image pull honguyen982020614/devopsexample'
+                sh 'docker container stop tuyennv-springboot || echo "this container does not exist" '
                 sh 'docker network create dev || echo "this network exists"'
                 sh 'echo y | docker container prune '
 
-                sh 'docker container run -d --rm --name khalid-springboot -p 8081:8080 --network dev khaliddinh/springboot'
+                sh 'docker container run -d --rm --name khalid-springboot -p 8081:8080 --network dev tuyennv/springboot'
             }
         }
  

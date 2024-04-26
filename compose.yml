@@ -3,11 +3,11 @@ name: springboot-mysql-compose
 
 services:
   app:
-    container_name: khalid-springboot
+    container_name: tuyennv-springboot
     build:
       context: .
       dockerfile: ./Dockerfile2
-    image: khaliddinh/springboot
+    image: tuyennv/springboot
     ports:
       - "8082:8080"
     # restart: on-failure
