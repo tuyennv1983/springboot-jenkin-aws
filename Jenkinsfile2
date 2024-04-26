@@ -11,7 +11,7 @@ pipeline {
                 environment name: 'ACTION', value: 'Build'
             }
             steps {
-                withDockerRegistry(credentialsId: 'docker-hub-cred', url: 'https://index.docker.io/v1/') {
+                withDockerRegistry(credentialsId: 'docker-hub-cred', url: 'https://hub.docker.com/repository/docker/honguyen982020614/devopsexample') {
                     sh 'docker compose up -d --build'
                     sh 'docker compose push'
                 }
