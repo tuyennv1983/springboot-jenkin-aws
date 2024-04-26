@@ -23,7 +23,7 @@ pipeline {
             steps {
                 withDockerRegistry(credentialsId: 'docker-hub-cred', url: 'https://hub.docker.com/repository/docker/honguyen982020614/devopsexample') {
                     sh 'docker build -t honguyen982020614/devopsexample .'
-                    sh 'docker push honguyen982020614/devopsexample'
+                    sh 'docker push honguyen982020614/devopsexample:lastest'
                 }
             }
         }
@@ -51,7 +51,7 @@ pipeline {
                 sh 'docker network create dev || echo "this network exists"'
                 sh 'echo y | docker container prune '
 
-                sh 'docker container run -d --rm --name khalid-springboot -p 8081:8080 --network dev tuyennv/springboot'
+                sh 'docker container run -d --rm --name tuyennv-springboot -p 8081:8080 --network dev tuyennv/springboot'
             }
         }
  
